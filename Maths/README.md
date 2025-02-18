@@ -18,7 +18,38 @@
 
 
 # Central Limit Theorem<a name="clt"></a>
-- this also implies that datasets with $n_{samples} > 30$ can freely use Z-test<font color="red">How?</font>
+- this also implies that datasets with $n_{samples} > 30$ (emprirical approximation of a *large-enough dataset*) can freely use Z-test
+    - [Z-test](../Z-test/README.md#applicability) requires the knowledge of the population variance, and that **it is fixed and finite**.
+- ***Sample mean has a normal distribution for a large enough sample regardless of the underlying population distribution, as long as it has a fixed and finite variance***
+- Proof:
+    - sample = $\{X_1, X_2, \cdots X_n \}$, sample mean $\bar{X} = \dfrac{\sum\limits_{i=1}^nX_i}{n}$
+    - **assumptions: population mean =** $\mu$ , **population variance =** $\sigma^2$
+    - standardized sample mean $Z = \dfrac{\bar{X} - \mu}{\sigma/\sqrt{n}}$
+        - standardizing any variable means substracting its mean from itself, and dividing this difference by that R.V.'s standard deviation
+        - the variance for the sample mean $\bar{X}$ is $\dfrac{\sigma^2}{n}$ as shown [here](#sm)
+    - now we need to prove that $Z$ is normally distributed
+    - we'll do that by proving that the MGF of $Z$ is that of a normal distribution. (similar to the trick used here to prove [closure under linear combination for normal distribution](#additive_closure))
+    - $M_Z(t) = \mathbb{E}\left[e^{tZ}\right] = \mathbb{E}\left[e^{\large t\left(\dfrac{\bar{X} - \mu}{\sigma/\sqrt{n}}\right)}\right]$
+        - $\dfrac{\bar{X} - \mu}{\sigma/\sqrt{n}} = \dfrac{\sum\limits_{i=1}^nX_i - n\mu}{\sigma.\sqrt{n}}= \dfrac{\sum\limits_{i=1}^n \left(X_i - \mu\right)}{\sigma.\sqrt{n}}= \frac{1}{\sqrt{n}}\sum\limits_{i=1}^n\left(\dfrac{ X_i - \mu}{\sigma}\right)$ = sum of standardized R.V.'s. \
+        Lets name this: a standardized R.V. $X_i^{(std)} = \dfrac{ X_i - \mu}{\sigma}$
+    - $M_Z(t) = \mathbb{E}\left[e^{tZ}\right] = \mathbb{E}\left[e^{\dfrac{t}{\sqrt{n}}\sum\limits_{i=1}^n\left(X_i^{(std)}\right)}\right] = \mathbb{E}\left[\prod\limits_{i=1}^n e^{\dfrac{tX_i^{(std)}}{\sqrt{n}}}\right]$
+    - since all $X_i$'s are i.i.d., the expectation of their product is same as the product of their expectations
+    - $M_Z(t) = \prod\limits_{i=1}^n\mathbb{E}\left[ e^{\dfrac{tX_i^{(std)}}{\sqrt{n}}}\right] = \prod\limits_{i=1}^n M_{X_{\normalsize i, adj}^{(std)}}(t)$ (adjusted because of the $\sqrt{n}$ in the denominator)
+    - since all $X_i^{(std)}$'s are i.i.d. , their corresponding MGF will have the same expression.
+    - $M_Z(t) = \left(M_{X_{adj}^{(std)}}(t)\right)^n$
+    - using Maclaurin series , [by definition of the MGF](#moments_def), the $M_{X^{(std)}}(t) = 1 + \dfrac{\mathbb{E}\left[X^{(std)}\right]t}{1!}+ \dfrac{\mathbb{E}\left[\left(X^{(std)}\right)^2\right]t^2}{2!}+ \dfrac{\mathbb{E}\left[\left(X^{(std)}\right)^3\right]t^3}{3!} + \cdots$
+        - for a standardized R.V., $\mathbb{E}\left[X^{(std)}\right] = 0$ (0 mean), $\mathbb{E}\left[\left(X^{(std)}\right)^2\right] = 1$ (variance = 1)
+        - whatever be the skewness, i.e. third moment , we label that quantity (**not a constant**) as $\kappa_3$
+        - hence, $M_{X^{(std)}}(t) = 1 + 0 + \dfrac{t^2}{2!} + \dfrac{\kappa_3 t^3}{3!} + \cdots \Rightarrow M_{X_{adj}^{(std)}}(t) = 1 + 0 + \dfrac{t^2}{n\times 2!} + \dfrac{\kappa_3 t^3}{(n)^{3/2}\times 3!} + \cdots$ 
+    - $M_Z(t) = \left(1 + 0 + \dfrac{t^2}{n\times 2!} + \dfrac{\kappa_3 t^3}{(n)^{3/2}\times 3!} + O\left(\left(\dfrac{t}{\sqrt{n}}\right)^4\right)\right)^n$
+    - observe that **for large-n**, i.e. $n\rightarrow \infty$ , this approaches an indeterminate form of $1^{\infty}$
+        - such integrals are usually resolved by taking the natural log on both sides
+        - in this case, $ln\left(M_Z(t)\right) = n.ln\left(1 + 0 + \dfrac{t^2}{n\times 2!} + \dfrac{\kappa_3 t^3}{(n)^{3/2}\times 3!} + O\left(\left(\dfrac{t}{\sqrt{n}}\right)^4\right)\right)$
+        - $limit_{n\rightarrow \infty}\left(n.ln\left(1 + 0 + \dfrac{t^2}{n\times 2!} + \dfrac{\kappa_3 t^3}{(n)^{3/2}\times 3!} + O\left(\left(\dfrac{t}{\sqrt{n}}\right)^4\right)\right)\right)= limit_{n\rightarrow \infty}\left(\dfrac{ln\left(1 + 0 + \dfrac{t^2}{n\times 2!} + \dfrac{\kappa_3 t^3}{(n)^{3/2}\times 3!} + O\left(\left(\dfrac{t}{\sqrt{n}}\right)^4\right)\right)}{1/n}\right) = limit_{h\rightarrow 0}\left(\dfrac{ln\left(1 + 0 + \dfrac{h.t^2}{2!} + \dfrac{\kappa_3 t^3 h^{3/2}}{3!} + O\left(\left(t\sqrt{h}\right)^4\right)\right)}{h}\right)$
+        - this is now a $\frac{0}{0}$ indeterminate form, and LHo'pital rule can be applied.
+        - $\textrm{limit }_{h\rightarrow 0} \left(ln\left(M_Z(t)\right)\right) = \dfrac{1}{\left(1 + 0 + \dfrac{h.t^2}{2!} + \dfrac{\kappa_3 t^3 h^{3/2}}{3!} + O\left(\left(t\sqrt{h}\right)^4\right)\right)}.\left(\dfrac{t^2}{2!} + \dfrac{(3/2).\kappa_3 t^3 h^{1/2}}{3!} + \textrm{ higher order terms in t and h} \right) = \dfrac{t^2}{2}$
+        - hence, **provided n is large**, $M_Z(t) = e^{t^2/2}$ and this is nothing but the MGF of a standard normal distribution.(plug in $\mu = 0 \,,\, \sigma = 1$ in this [MGF of a normal distribution](#normal_pdf_mgf))
+        
 
 # Slutsky's Theorem<a name="st"></a>
 - 

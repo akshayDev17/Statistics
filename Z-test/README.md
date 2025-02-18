@@ -69,3 +69,6 @@
     - first sample: $X_1$ with $n_1$ size, population mean = $\mu_1$ , population variance = $\sigma^2_1$
     - second sample: $X_2$ with $n_2$ size, population mean = $\mu_2$ , population variance = $\sigma^2_2$
 - 
+
+## Questions
+<font color="red">can i use z-test of two population/samples to gauge the covariate shift when moving from the train sample to the test sample?</font>
