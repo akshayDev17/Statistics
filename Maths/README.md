@@ -49,6 +49,8 @@
         - this is now a $\frac{0}{0}$ indeterminate form, and LHo'pital rule can be applied.
         - $\textrm{limit }_{h\rightarrow 0} \left(ln\left(M_Z(t)\right)\right) = \dfrac{1}{\left(1 + 0 + \dfrac{h.t^2}{2!} + \dfrac{\kappa_3 t^3 h^{3/2}}{3!} + O\left(\left(t\sqrt{h}\right)^4\right)\right)}.\left(\dfrac{t^2}{2!} + \dfrac{(3/2).\kappa_3 t^3 h^{1/2}}{3!} + \textrm{ higher order terms in t and h} \right) = \dfrac{t^2}{2}$
         - hence, **provided n is large**, $M_Z(t) = e^{t^2/2}$ and this is nothing but the MGF of a standard normal distribution.(plug in $\mu = 0 \,,\, \sigma = 1$ in this [MGF of a normal distribution](#normal_pdf_mgf))
+    - Remember that $Z = \dfrac{\bar{X} - \mu}{\sigma/\sqrt{n}}$ was the **standardized sample mean**
+    - Hence, the actual **sample mean** will be normally distributed: $\bar{X} \sim \mathcal{N}(\mu, \sigma^2)$
         
 
 # Slutsky's Theorem<a name="st"></a>
