@@ -68,7 +68,16 @@
 - samples:
     - first sample: $X_1$ with $n_1$ size, population mean = $\mu_1$ , population variance = $\sigma^2_1$
     - second sample: $X_2$ with $n_2$ size, population mean = $\mu_2$ , population variance = $\sigma^2_2$
-- 
+- for $Y = \bar{X_1} - \bar{X_2}$
+    - we already know that $\mathbb{E}[\bar{X_1}] = \dfrac{\sigma_1^2}{n_1} \,,\, \mathbb{E}[\bar{X_2}] = \dfrac{\sigma_2^2}{n_2}$
+    - $\mathbb{E}[Y] = \mathbb{E}[\bar{X_1} - \bar{X_2}] = \mathbb{E}[\bar{X_1}] - \mathbb{E}[\bar{X_2}] = \mu_1 - \mu_2$
+    - $Var.(Y) = \mathbb{E}[(Y - \mathbb{E}[Y])^2] = \mathbb{E}[((\bar{X_1} - \mu_1) - (\bar{X_2} - \mu_2))^2] =\mathbb{E}[(\bar{X_1} - \mu_1)^2 + (\bar{X_2} - \mu_2)^2 - 2.(\bar{X_1} - \mu_1).(\bar{X_2} - \mu_2)] = \dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2} - 2(\mu_1\mu_2 - \mu_1\mu_2- \mu_1\mu_2 + \mu_1\mu_2) = \dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}$ \
+    Therefore, $Var.(Y) = \dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}$
+- hence, the difference in sample mean belongs to a normal distribution: $\mathcal{N}\left(\mu_1 - \mu_2 , \dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}\right)$
+- now, if z-score is defined as $Z = \dfrac{(\bar{X_1} - \bar{X_2}) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}}$, then this is a $\mathcal{N}(0,1)$
+- Null hypothesis is $H_0: \mu_0 = \mu_1 - \mu_2$, where $\mu_0$ is the given number.
+    - intuitively explained as the given number is able to capture the statistical difference between the two samples (representing two populations) significantly.
+<font color="red">check if a t-test for two sample means exist</font>
 
 ## Questions
 <font color="red">can i use z-test of two population/samples to gauge the covariate shift when moving from the train sample to the test sample?</font>
