@@ -23,6 +23,9 @@
 # When to use?<a name="applicability"></a>
 - **population variance should be a known, fixed quantity**
     - **if population variance is unknown, use T-test instead**
+    - z-test could still be used with the approximation of $s_{bessel} = \sigma$, provided the sample size is large.
+        - if the sample size is small, the variability of $s_{bessel}$ makes it a bad approximator of $\sigma$
+        - check out the [Chi-squared distribution notes](../Chi-squared%20Test/README.md) to know about how sample variance is distributed.
 - infer population properties from a given, considerably large sample
 - comparing population means/variances of 2 different samples
 
@@ -77,7 +80,7 @@
 - now, if z-score is defined as $Z = \dfrac{(\bar{X_1} - \bar{X_2}) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}}$, then this is a $\mathcal{N}(0,1)$
 - Null hypothesis is $H_0: \mu_0 = \mu_1 - \mu_2$, where $\mu_0$ is the given number.
     - intuitively explained as the given number is able to capture the statistical difference between the two samples (representing two populations) significantly.
-<font color="red">check if a t-test for two sample means exist</font>
+<font color="red">Add a t-test for two sample means in the T-test notes folder.</font>
 
 ## Questions
 <font color="red">can i use z-test of two population/samples to gauge the covariate shift when moving from the train sample to the test sample?</font>
