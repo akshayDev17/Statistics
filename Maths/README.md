@@ -207,6 +207,8 @@ $S^2 = \frac{1}{n-1} \sum\limits_{i=1}^n (X_i - \bar{X})^2$
     - $t\mu - \frac{1}{2\sigma^2}\left( (X - \mu - 2\sigma^2t)^2 - (\sigma^4t^2)\right) = t\mu + \frac{(\sigma.t)^2}{2} - \dfrac{(X - \mu - 2\sigma^2t)^2}{2\sigma^2}$
     - first two terms are independent of $X$, they'll be treated as constants, so lets focus further on the expression containing $X \rightarrow - \dfrac{(X - \mu - 2\sigma^2t)^2}{2\sigma^2}$
     - let $y = X - \mu - 2\sigma^2t \Rightarrow dy = dx$ , the above exponent integral becomes $\int\limits_{-\infty}^{\infty} e^{- \dfrac{(X - \mu - 2\sigma^2t)^2}{2\sigma^2}} dX = \int\limits_{-\infty}^{\infty} e^{- \dfrac{y^2}{2\sigma^2}} dy = \sqrt{2\pi}\sigma$
+        - **Observe that the final expression inside the integral**, $\int\limits_{-\infty}^{\infty} e^{- \dfrac{y^2}{2\sigma^2}} dy$ **converges** hence has a definite and finite value.
+        This **obeys with the Fubini theorem's condition** used while deriving the general expression for MGF. 
 - hence, $M_X(t) = \dfrac{1}{\sigma\sqrt{2\pi}} . e^{\left(t\mu + \frac{(\sigma.t)^2}{2}\right)}.\sqrt{2\pi}\sigma = e^{\left(t\mu + \frac{(\sigma.t)^2}{2}\right)}$
 - Therefore, for a normally distributed random variable X, its moment generating function is $\mathbf{M_X(t) = e^{\left(\large t\mu + \frac{(\sigma.t)^2}{2}\right)}}$
 
